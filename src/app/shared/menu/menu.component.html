@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <!-- Second navbar for categories -->
+  <nav class="navbar  navbar-default ">
+    <div class="container ">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand amaranth" href="/">
+         <span> <img src="assets/img/logo.png" class="logo"></span> MedClinic</a>
+
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+              <li><a routerLink="/user"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+             
+            </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li
+            ><a routerLinkActive="active" routerLink="/schedule" class="navbar-link">Agenda</a></li>
+    
+          <li>
+            <a routerLinkActive="active" routerLink="/patient" class="navbar-link">Paciente</a>
+          </li>
+          <li>
+            <a routerLinkActive="active" routerLink="/admin" class="navbar-link">Administrativo</a>
+          </li>
+        </ul>
+        
+
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+  <!-- /.navbar -->
+</div>
+<!-- /.container-fluid -->

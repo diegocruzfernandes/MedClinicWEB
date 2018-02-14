@@ -1,0 +1,29 @@
+.navbar-header{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.navbar-right{
+    margin-right: 20px;
+}
+.navbar{
+    margin-bottom: 5px;
+    background-color: rgb(226, 229, 255);
+}
+.table-row{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.glyphicon{
+    margin-left: 10px;
+}
+.thead{
+    background-color: rgb(233, 233, 233)
+}
+.btncontrol{
+    margin: 0;
+    padding: 0;    
+}
+.pagination{
+    margin: 0;
+    padding-top: 8px
+}
