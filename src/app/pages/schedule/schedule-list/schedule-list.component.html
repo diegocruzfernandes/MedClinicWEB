@@ -44,6 +44,7 @@
         <th >Término</th>
         <th >Tipo</th>
         <th >Status</th>
+        <th>Add</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>      
@@ -55,10 +56,11 @@
         <td>{{item.doctor}}</td>
         <td>{{item.initial | date:'dd/MM/yy HH:mm'}}</td>
         <td>{{item.finish | date:'dd/MM/yy HH:mm'}}</td>
-        <td>{{item.typeConsult}}</td>
+        <td>{{item.typeconsult}}</td>
         <td>{{item.status}}</td>
-        <td><p><button class="btn btn-primary btn-xs" (click)="Edit(item.id)" ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
-        <td><p><button class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
+        <td><p><button (click)="AddConsult(item.id)" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-plus btncontrol"></span></button></p></td>
+        <td><p><button (click)="Edit(item.id)" class="btn btn-primary btn-xs"><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
+        <td><p><button (click)="Delete(item.id)" class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
 
       </tr>
     </tbody>

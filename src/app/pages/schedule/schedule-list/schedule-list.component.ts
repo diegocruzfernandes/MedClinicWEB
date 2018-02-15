@@ -1,3 +1,4 @@
+
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -24,12 +25,17 @@ export class ScheduleListComponent implements OnInit {
     this.GetAllData(this.page)
   }
 
+  AddConsult(id: number){
+    this.router.navigate(['/schedule', id, 'form', true ]);
+  }
+
   Edit(id:number){
-    console.log(id);
-    this.router.navigate(['/schedule', id, 'editar']);
+    this.router.navigate(['/schedule', id, 'form', true ]);
   }
   Delete(id:number){
-    this.router.navigateByUrl("/shedule/form/"+id);
+    this.scheduleService.removeData(id);
+    let index = this.data.findIndex(i => i.id === id);
+    this.data.splice(index, 1);
   }
 
   NextPage() {

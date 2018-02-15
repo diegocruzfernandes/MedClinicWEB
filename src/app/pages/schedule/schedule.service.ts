@@ -20,19 +20,14 @@ export class ScheduleService {
         return this.conn.GetFilter(this.path, id);
     }
 
-    saveData(schedule: Schedule) {
+    
 
-        if (schedule.id > 0) {
-            return this.conn.Post(this.path, schedule)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        } else {
-            return this.conn.Put(this.path, schedule)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        }
+    saveData(schedule: Schedule) {
+        return this.conn.Post(this.path, schedule)    
+    }
+
+    updateData(schedule: Schedule){
+        return this.conn.Put(this.path, schedule)
     }
 
     removeData(id:number){

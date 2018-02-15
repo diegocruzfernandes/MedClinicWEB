@@ -3,8 +3,8 @@ export class Patient{
     name: string;
     gender: string;
     email: string;
-    phoneNumber: string;
+    phonenumber: string;
     details: string;
-    birthDate: Date;
+    birthdate: Date;
     enabled: boolean;
 }

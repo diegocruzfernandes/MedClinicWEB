@@ -37,7 +37,7 @@ export class ConnService {
         let headers = new Headers({ 'Content-Type': 'application/json' });        
         options = new RequestOptions({ headers: headers });        
         return this.http
-            .post(this.serviceUrl + path, data, options)           
+            .post(this.serviceUrl + path,data, options)           
     }
 
     Delete(path: string, id: number) {
@@ -50,9 +50,10 @@ export class ConnService {
 
     Put(path: string, data: any) {
         let options: RequestOptions;
-        let headers = new Headers({ 'Content-Type': 'application/json' });                
+        let headers = new Headers({ 'Content-Type': 'application/json' });    
+                
         options = new RequestOptions({ headers: headers });
         return this.http
-            .put(this.serviceUrl + path, JSON.stringify(data), options)
+            .put(this.serviceUrl + path, data, options)
     }
 }

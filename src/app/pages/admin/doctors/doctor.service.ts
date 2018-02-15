@@ -1,7 +1,9 @@
+
 import { ConnService } from './../../../services/conn.service';
 import { Doctor } from './doctor.model';
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DoctorService {
@@ -22,18 +24,11 @@ export class DoctorService {
     }
 
     saveData(doctor: Doctor) {
+        return this.conn.Post(this.path, doctor);
+    }
 
-        if (doctor.id > 0) {
-            return this.conn.Post(this.path, doctor)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        } else {
-            return this.conn.Put(this.path, doctor)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        }
+    updateData(doctor:Doctor){
+        return this.conn.Put(this.path, doctor);
     }
 
     removeData(id:number){

@@ -23,10 +23,12 @@ export class SecretaryListComponent implements OnInit {
 
   Edit(id:number){
     console.log(id);
-    this.router.navigate(['/secretary/form', id, 'editar']);
-  }
-  Delete(id:number){
-    this.router.navigateByUrl("/secretary/form/"+id);
+    this.router.navigate(['/secretary/edit/', id]);
   }
 
+  Delete(id:number){
+    this.secretaryService.removeData(id);
+    let index = this.secretaries.findIndex(i => i.id === id);
+    this.secretaries.splice(index, 1);
+  }
 }

@@ -1,7 +1,7 @@
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/map';
 
 import { AdminComponent } from 'app/pages/admin/admin.component';
@@ -26,6 +26,7 @@ import { SecretaryService } from './secretary/secretaty.service';
     CommonModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     AdminRoutingModule
   ],
   exports: [],

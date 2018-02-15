@@ -1,13 +1,13 @@
 export class Schedule {
 
     "id": number;
-    "patientId": number;
+    "patientid": number;
     "patient": string;
-    "doctorId": number;
+    "doctorid": number;
     "doctor": string;
-    "typeConsultId": number;
-    "typeConsult": string;
-    "statusId": number;
+    "typeconsultid": number;
+    "typeconsult": string;
+    "statusid": number;
     "status": string;
     "initial":Date;
     "finish": Date;

@@ -1,3 +1,30 @@
-<p>
-  type-consult-form works!
-</p>
+<div class="col-md-6">
+  <legend class="amaranth">{{title}}</legend>
+ 
+  <div class="notification is-danger">
+    <ul >
+      <li *ngFor="let error of errors">{{error}}</li>
+    </ul>
+  </div>
+
+  <form class="form-group" [formGroup]="form">
+    <p class="control">
+      <input type="text" class="form-control" placeholder="Nome" formControlName="name">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls['name'].valid && !form.controls['name'].pristine">Nome inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" class="form-control" placeholder="Descrição" formControlName="description">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.description.valid && !form.controls.description.pristine">Description inválido</span>
+    </p>
+
+    <p>
+      <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
+    </p>
+  </form>
+  
+  <div class="alert alert-success" role="alert" [hidden]="!savedsuccess" >
+    Dados Salvos com sucesso!
+  </div>
+
+</div>

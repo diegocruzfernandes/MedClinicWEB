@@ -20,13 +20,15 @@ const AdmingRoutes: Routes = [
         { path: 'doctor', component: DoctorsComponent },  
         { path: 'doctor/list', component: DoctorsListComponent }, 
         { path: 'doctor/form', component: DoctorFormComponent },
-        { path: 'doctor/form:id', component: DoctorFormComponent },  
+        { path: 'doctor/edit/:id', component: DoctorFormComponent },  
         { path: 'secretary', component: SecretaryComponent },  
         { path: 'secretary/list', component: SecretaryListComponent },  
-        { path: 'secretary/form', component: SecretaryFormComponent },  
+        { path: 'secretary/form', component: SecretaryFormComponent }, 
+        { path: 'secretary/edit/:id', component: SecretaryFormComponent },  
         { path: 'typeconsult', component: TypeConsultComponent },  
-        { path: 'typeconsult/list', component: TypeConsultListComponent },  
+        { path: 'typeconsult/list', component: TypeConsultListComponent }, 
         { path: 'typeconsult/form', component: TypeConsultFormComponent },    
+        { path: 'typeconsult/edit/:id', component: TypeConsultFormComponent },    
     ]}
 ];
 

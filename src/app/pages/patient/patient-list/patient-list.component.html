@@ -28,7 +28,7 @@
           </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a routerLink="/schedule/form" class="navbar-link">Adicionar<span><i class="glyphicon glyphicon-plus"></i></span></a></li>
+            <li><a routerLink="/patient/form" class="navbar-link">Adicionar<span><i class="glyphicon glyphicon-plus"></i></span></a></li>
           </ul>
       </div>
     </nav>
@@ -51,8 +51,8 @@
       <td>{{item.name}}</td>
       <td>{{item.phoneNumber}}</td> 
       <td>{{item.birthDate | date:'dd/MM/yyyy'}}</td> 
-      <td><p><button class="btn btn-primary btn-xs" (click)="Edit(item.id)" ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
-      <td><p><button class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
+      <td><p><button (click)="Edit(item.id)" class="btn btn-primary btn-xs"  ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
+      <td><p><button (click)="Delete(item.id)" class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
 
     </tr>
   </tbody>

@@ -10,7 +10,7 @@ import { Doctor } from 'app/pages/admin/doctors/doctor.model';
 })
 export class DoctorsListComponent implements OnInit {
 
-  //doctors: Doctor[] = new Array<Doctor>();
+  //public doctors: Doctor[] = new Array<Doctor>();
   doctors: Doctor[] = [] ;
 
   constructor(private doctorService:DoctorService, private router:Router) { }
@@ -24,10 +24,13 @@ export class DoctorsListComponent implements OnInit {
 
   Edit(id:number){
     console.log(id);
-    this.router.navigate(['/doctor/form', id, 'editar']);
+    this.router.navigate(['/doctor/edit/', id]);
   }
+
   Delete(id:number){
-    this.router.navigateByUrl("/doctor/form/"+id);
+    this.doctorService.removeData(id);
+    let index = this.doctors.findIndex(i => i.id === id);
+    this.doctors.splice(index, 1);
   }
 
 }

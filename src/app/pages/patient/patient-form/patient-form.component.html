@@ -1,0 +1,57 @@
+<div class="col-md-6">
+  <legend class="amaranth">{{title}}</legend>
+
+  <div class="notification is-danger">
+    <ul>
+      <li *ngFor="let erro of errors">
+        {{ erro }}
+      </li>
+    </ul>
+  </div>
+
+  <form class="form-group" [formGroup]="form">
+    
+    <p class="control">
+      <input type="text" class="form-control" placeholder="Nome" formControlName="name">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls['name'].valid && !form.controls['name'].pristine">Nome inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" class="form-control" placeholder="E-mail" formControlName="email">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.email.valid && !form.controls.email.pristine">E-mail inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" class="form-control" placeholder="Telefone"  formControlName="phonenumber">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.phonenumber.valid && !form.controls.phonenumber.pristine">Telefone inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" [textMask]="{mask: mask}"  class="form-control" placeholder="Nascimento (dd/mm/yyyy)"  formControlName="birthdate">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.birthdate.valid && !form.controls.birthdate.pristine">Data de Nascimento inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" class="form-control" placeholder="Informações" formControlName="details">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.details.valid && !form.controls.details.pristine">Dados inválido</span>
+    </p>
+
+    <p class="control">
+      <select class="selectpicker form-control" formControlName="gender">
+        <option value=0>Masculino</option>
+        <option value=1>Feminino</option>
+      </select>
+      <span class="alert-danger" *ngIf="!form.controls.gender">Genero inválido</span>
+    </p>
+
+    <p>
+      <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
+    </p>
+    
+  </form>
+
+  <div class="alert alert-success" role="alert" [hidden]="!savedsuccess">
+    Dados Salvos com sucesso!
+  </div>
+
+</div>

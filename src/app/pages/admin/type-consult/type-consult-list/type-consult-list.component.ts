@@ -3,6 +3,7 @@ import { TypeConsultyService } from './../type-consult.service';
 import { TypeConsult } from './../type-consult.model';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-type-consult-list',
   templateUrl: './type-consult-list.component.html',
@@ -12,7 +13,10 @@ export class TypeConsultListComponent implements OnInit {
 
   typeConsult: TypeConsult[] = [];
 
-  constructor(private typeConsultService: TypeConsultyService, private router:Router) { }
+  constructor(
+    private typeConsultService: TypeConsultyService, 
+    private router:Router,
+  ) { }
 
   ngOnInit() {
     this.typeConsultService.getAllData(10,1).subscribe(
@@ -23,10 +27,13 @@ export class TypeConsultListComponent implements OnInit {
 
   Edit(id:number){
     console.log(id);
-    this.router.navigate(['/typeconsult/form', id, 'editar']);
+    this.router.navigate(['/typeconsult/edit/', id]);
   }
+
   Delete(id:number){
-    this.router.navigateByUrl("/typeconsult/form/"+id);
+   this.typeConsultService.removeData(id);
+   let index = this.typeConsult.findIndex(i => i.id === id);
+   this.typeConsult.splice(index, 1);
   }
 
 }

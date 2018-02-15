@@ -1,8 +1,8 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { TextMaskModule } from 'angular2-text-mask';
 import { ScheduleService } from './schedule.service';
 import { ScheduleComponent } from './schedule.component';
 import { ScheduleRoutingModule } from 'app/pages/schedule/schedule.routing.module';
@@ -13,6 +13,7 @@ import { ScheduleListComponent } from './schedule-list/schedule-list.component';
     imports: [
       CommonModule,
       FormsModule,
+      TextMaskModule,
       ReactiveFormsModule,
       ScheduleRoutingModule            
     ],
@@ -24,6 +25,5 @@ import { ScheduleListComponent } from './schedule-list/schedule-list.component';
     ],
     providers: [ScheduleService]
   })
-  export class SheduleModule { 
-    }
+  export class SheduleModule { }
   

@@ -1,6 +1,6 @@
+import { Patient } from './patient.model';
 import { ConnService } from 'app/services/conn.service';
 import { Injectable } from '@angular/core';
-import { Patient } from 'app/pages/patient/patient.model';
 
 @Injectable()
 export class PatientService {
@@ -19,23 +19,16 @@ export class PatientService {
     }
 
     saveData(patient: Patient) {
-
-        if (patient.id > 0) {
-            return this.conn.Post(this.path, patient)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        } else {
-            return this.conn.Put(this.path, patient)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        }
+        return this.conn.Post(this.path, patient)
     }
 
-    removeData(id:number){
+    updateData(patient: Patient) {
+        return this.conn.Put(this.path, patient)
+    }
+
+    removeData(id: number) {
         return this.conn.Delete(this.path, id)
-        .subscribe(
+            .subscribe(
             res => { console.log(res); },
             err => { console.log("Erro: " + err); });
     }

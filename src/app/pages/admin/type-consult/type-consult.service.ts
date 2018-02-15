@@ -19,17 +19,11 @@ export class TypeConsultyService {
     }
 
     saveData(typeConsult: TypeConsult) {
-        if (typeConsult.Id > 0) {
-            return this.conn.Post(this.path, typeConsult)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        } else {
-            return this.conn.Put(this.path, typeConsult)
-                .subscribe(
-                res => { console.log(res); },
-                err => { console.log("Erro: " + err); });
-        }
+        return this.conn.Post(this.path, typeConsult)
+    }
+
+    updateData(typeConsult: TypeConsult){
+        return this.conn.Put(this.path, typeConsult)
     }
 
     removeData(id:number){

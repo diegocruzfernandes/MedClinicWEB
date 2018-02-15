@@ -8,7 +8,8 @@ import { ScheduleListComponent } from 'app/pages/schedule/schedule-list/schedule
 
 const scheduleRotingRoutes: Routes = [
     { path: '', component: ScheduleComponent, children: [
-        { path: 'new', component: ScheduleFormComponent },            
+        { path: 'form', component: ScheduleFormComponent },
+        { path: 'form/:id', component: ScheduleFormComponent }, 
         { path: 'list', component: ScheduleListComponent }      
     ]},
     

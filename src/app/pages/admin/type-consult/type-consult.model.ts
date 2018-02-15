@@ -1,7 +1,7 @@
 export class TypeConsult{
     
-    Id: number;
-    Name: string;
-    Description: number;
-    Enabled: boolean;
+    id: number;
+    name: string;
+    description: number;
+    enabled: boolean;
 }

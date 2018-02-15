@@ -1,7 +1,8 @@
-import { Patient } from './../patient.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
 import { PatientService } from 'app/pages/patient/patient.service';
+import { Patient } from './../patient.model';
 
 @Component({
   selector: 'app-patient-list',
@@ -22,10 +23,13 @@ export class PatientListComponent implements OnInit {
 
   Edit(id: number) {
     console.log(id);
-    this.router.navigate(['/patient/form', id, 'editar']);
+    this.router.navigate(['/patient/edit/', id]);
   }
-  Delete(id: number) {
-    this.router.navigateByUrl("/patient/form/" + id);
+
+  Delete(id:number){
+    this.patientService.removeData(id);
+    let index = this.patienties.findIndex(i => i.id === id);
+    this.patienties.splice(index, 1);
   }
 
   NextPage() {

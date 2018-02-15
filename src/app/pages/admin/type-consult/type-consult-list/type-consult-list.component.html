@@ -15,9 +15,7 @@
               </div>
             </div>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a routerLink="/schedule/form" class="navbar-link">Adicionar<span><i class="glyphicon glyphicon-plus"></i></span></a></li>
-            </ul>
+          
         </div>
       </nav>
 </div>
@@ -39,10 +37,11 @@
         <td>{{item.name}}</td>
         <td>{{item.description}}</td>
         <td><input type="checkbox" [(ngModel)]="item.enabled" [name]="item.id"></td>
-        <td><p><button class="btn btn-primary btn-xs" (click)="Edit(item.id)" ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
-        <td><p><button class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
+        <td><p><button (click)="Edit(item.id)" class="btn btn-primary btn-xs"  ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
+        <td><p><button (click)="Delete(item.id)" class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
 
       </tr>
     </tbody>
   </table>
 </div>
+
