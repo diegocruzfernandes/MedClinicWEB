@@ -1,0 +1,17 @@
+.menuLogin{
+    margin-top: 10%
+}
+
+.logo{
+    height: 70px;
+    padding-left: 41%;
+}
+.alert-danger{
+    font-size: 14px;
+    color: white;
+    background-color: #b12121;
+    padding: 3px;
+    padding-right: 63%;
+
+}
+

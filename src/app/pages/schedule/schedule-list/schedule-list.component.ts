@@ -62,4 +62,8 @@ export class ScheduleListComponent implements OnInit {
     )
   }
 
+  search(data: string){
+
+  }
+
 }

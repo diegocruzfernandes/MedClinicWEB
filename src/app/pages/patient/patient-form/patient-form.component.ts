@@ -7,8 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Patient } from './../patient.model';
 import { PatientService } from 'app/pages/patient/patient.service';
-import { dateIsEndOfMonth } from 'app/shared/dateIsEndOfMonth';
-
 
 @Component({
   selector: 'app-patient-form',
@@ -135,7 +133,6 @@ export class PatientFormComponent implements OnInit {
 
     let b = d.split('-');
     return b[2] +'/'+ b[1] + '/' + b[0];
-
   }
 
   ngOnDestroy() {

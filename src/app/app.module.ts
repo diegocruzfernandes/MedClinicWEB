@@ -1,6 +1,11 @@
+import { AuthGuard } from './guards/auth.guard';
+import { UsersAuthService } from './services/user.auth.service';
+import { LoginService } from './pages/login/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import 'rxjs/add/operator/map';
 
 import { SheduleModule } from 'app/pages/schedule/schedule.module';
 import { UserModule } from 'app/pages/user/user.module';
@@ -11,6 +16,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ConnService } from 'app/services/conn.service';
+import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 
 
 //import 'rxjs/add/operator/map';
@@ -19,9 +25,12 @@ import { ConnService } from 'app/services/conn.service';
   declarations: [
     AppComponent,
     MenuComponent,
-    LoginComponent    
+    LoginComponent,
+    PagenotfoundComponent    
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     BrowserModule,
     UserModule,
     SheduleModule,        
@@ -29,7 +38,7 @@ import { ConnService } from 'app/services/conn.service';
     PatientModule,
     AppRoutingModule  
   ],
-  providers: [ConnService],
+  providers: [AuthGuard, ConnService, LoginService, UsersAuthService],
   bootstrap: [AppComponent]
   
 })

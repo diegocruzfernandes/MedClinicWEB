@@ -18,6 +18,10 @@ export class PatientService {
         return this.conn.GetFilter(this.path, id);
     }
 
+    findData(text:string, skip: number, take: number ){
+        return this.conn.Find(this.path+'/find', text, skip, take);
+    }
+
     saveData(patient: Patient) {
         return this.conn.Post(this.path, patient)
     }

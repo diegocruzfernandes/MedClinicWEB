@@ -31,8 +31,5 @@ import { PatientFormComponent } from 'app/pages/patient/patient-form/patient-for
   providers: [ConnService, PatientService ]
 })
 export class PatientModule {
-    constructor() {
-        console.log("CTO: Patient Module")
-        
-    }
+    constructor() { }
  }

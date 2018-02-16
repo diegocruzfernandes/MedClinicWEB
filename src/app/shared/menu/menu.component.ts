@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { UserModel } from './../../services/user.model';
+import { UsersAuthService } from './../../services/user.auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  user: UserModel = new UserModel();
+
+  constructor(private userAuthService: UsersAuthService, private router: Router) { }
 
   ngOnInit() {
+      this.userAuthService.GetUserData().subscribe(
+        u => this.user = u
+      );    
   }
 
+  logout(){
+    this.userAuthService.LogOut();
+    this.router.navigateByUrl('/login');  
+  }
 }

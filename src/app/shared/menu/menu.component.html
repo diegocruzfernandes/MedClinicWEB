@@ -18,8 +18,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-              <li><a routerLink="/user"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-             
+              <li><a routerLink="/user"><span class="glyphicon glyphicon-user"></span> {{user.nickname}}</a></li>    
+              <li><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>         
             </ul>
         
         <ul class="nav navbar-nav navbar-right">

@@ -56,4 +56,11 @@ export class PatientListComponent implements OnInit {
     )
   }
 
+  search(data: string){
+    this.patientService.findData(data, 10, this.page).subscribe(
+      d => { this.patienties = d  },
+      error => console.log('Error' + error)
+    )
+  }
+
 }

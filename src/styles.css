@@ -11,3 +11,8 @@
 .medium-text{
     font-size: 1.5em;
 }
+.pagination-centered{
+    left:50%;
+    top:50%;
+    text-align:center;
+}

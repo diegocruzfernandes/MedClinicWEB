@@ -20,10 +20,4 @@ const patientgRoutes: Routes = [
     exports: [RouterModule]
 })
 
-export class PatientRoutingModule { 
-   
-    constructor() {
-        console.log("CTO: Patient routing Module")
-        
-    }
-}
+export class PatientRoutingModule {  }
