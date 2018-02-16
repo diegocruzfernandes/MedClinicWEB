@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-   
+  ngOnInit() {   
     if(this.userAuthService.userAuthenticate) {
       if(this.loginService.validUser()){
         this.router.navigateByUrl('/schedule/list');
@@ -54,13 +53,10 @@ export class LoginComponent implements OnInit {
     } 
   }
 
-  submit() {
-   
+  submit() {   
     this.userLogin.username = this.form.value["username"];
     this.userLogin.password = this.form.value["password"];
 
-    if(this.loginService.authenticate(this.userLogin) )
-      this.router.navigateByUrl('/schelude/list');
-  } 
-
+    this.loginService.authenticate(this.userLogin)   
+  }
 }

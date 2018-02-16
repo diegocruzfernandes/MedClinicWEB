@@ -32,7 +32,7 @@ export class LoginService {
   }
 
   authenticate(userLogin: Login): boolean {
-    return this.userAuth.authenticate(userLogin.username, userLogin.password)    
+    return this.userAuth.authenticate(userLogin.username, userLogin.password) 
   }
 
   validUser(): boolean {
@@ -43,6 +43,7 @@ export class LoginService {
       console.log("Valid User: Está ATIVO!");
       return true;
     } else {
+      console.log("Valid User: NÂO ATIVO!");
       this.userAuth.doLogin(false);
       return false;
     }

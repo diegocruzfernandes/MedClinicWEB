@@ -65,7 +65,6 @@ export class UsersAuthService {
             .subscribe(
             (data: any) => {
                 let body = data.json();
-                console.log(body);
                 let user: UserModel = new UserModel();
                 user.token = body.token;
                 user.id = body.user.id;

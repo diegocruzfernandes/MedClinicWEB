@@ -1,3 +1,4 @@
+
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +16,11 @@ export class PatientListComponent implements OnInit {
   page: number = 1;
   pagePrevious: boolean = false;
 
-  constructor(private patientService: PatientService, private router: Router) { }
+  constructor(
+    private patientService: PatientService, 
+    private router: Router
+ 
+  ) { }
 
   ngOnInit() {
     this.GetAllData(this.page)
@@ -30,6 +35,11 @@ export class PatientListComponent implements OnInit {
     this.patientService.removeData(id);
     let index = this.patienties.findIndex(i => i.id === id);
     this.patienties.splice(index, 1);
+  }
+
+  AddSchedule(id:number){
+    console.log('%c ADD', 'background: #222; color: #bada55');
+    this.router.navigate(['patient/addschedule', id] );
   }
 
   NextPage() {

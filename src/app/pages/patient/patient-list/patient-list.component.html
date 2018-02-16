@@ -1,60 +1,83 @@
-<div class="row">  
+<div class="row">
   <nav class="navbar navbar-default">
-      <div class="container-fluid">
+    <div class="container-fluid">
 
-        <div class="navbar-header">
-          <span class="navbar-brand amaranth" href="#">Pacientes</span>
-        </div>
-        
-        <form class="navbar-form navbar-left" action="/action_page.php">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar" #searchText >
-            <div class="input-group-btn">
-              <button (click)="search(searchText.value)" class="btn btn-default" type="submit">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </div>
-          </div>
-        </form> 
-        
-        <ul class=" nav navbar-nav pagination">
-            <li class="page-item" >
-              <span class="page-link" (click)="PreviewPage()" >Anterior</span>
-            </li>
-            <li class="page-item"><span>Página:{{page}}</span></li>
-            <li class="page-item">
-              <a class="page-link" (click)="NextPage()">Próxima</a>
-            </li>
-          </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li><a routerLink="/patient/form" class="navbar-link">Adicionar<span><i class="glyphicon glyphicon-plus"></i></span></a></li>
-          </ul>
+      <div class="navbar-header">
+        <span class="navbar-brand amaranth" href="#">Pacientes</span>
       </div>
-    </nav>
+
+      <form class="navbar-form navbar-left" action="/action_page.php">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar" #searchText>
+          <div class="input-group-btn">
+            <button (click)="search(searchText.value)" class="btn btn-default" type="submit">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <ul class=" nav navbar-nav pagination">
+        <li class="page-item">
+          <span class="page-link" (click)="PreviewPage()">Anterior</span>
+        </li>
+        <li class="page-item">
+          <span>Página:{{page}}</span>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="NextPage()">Próxima</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a routerLink="/patient/form" class="navbar-link">Adicionar
+            <span>
+              <i class="glyphicon glyphicon-plus"></i>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 <div class="row table-row">
-<table class="table">
-  <thead class="thead">
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Telefone</th>
-      <th>Nascimento</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>      
-  </thead>
-  <tbody class="tbody">
-    <tr *ngFor="let item of patienties" >
-      <td>{{item.id}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.phoneNumber}}</td> 
-      <td>{{item.birthDate | date:'dd/MM/yyyy'}}</td> 
-      <td><p><button (click)="Edit(item.id)" class="btn btn-primary btn-xs"  ><span class="glyphicon btncontrol glyphicon-pencil"></span></button></p></td>
-      <td><p><button (click)="Delete(item.id)" class="btn btn-danger btn-xs"><span class="glyphicon btncontrol glyphicon-trash"></span></button></p></td>
+  <table class="table">
+    <thead class="thead">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Nascimento</th>
+        <th></th>
 
-    </tr>
-  </tbody>
-</table>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      <tr *ngFor="let item of patienties">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.phoneNumber}}</td>
+        <td>{{item.birthDate | date:'dd/MM/yyyy'}}</td>
+        <td>
+          <div >
+           
+              <button (click)="AddSchedule(item.id)" class="btn btn-success btn-xs" title="Adicionar agendamento">
+                <span class="glyphicon btncontrol glyphicon-plus"></span>
+              </button>
+           
+              <button (click)="Edit(item.id)" class="btn btn-primary btn-xs" title="Editar dados do paciente">
+                <span class="glyphicon btncontrol glyphicon-pencil"></span>
+              </button>
+            
+              <button (click)="Delete(item.id)" class="btn btn-danger btn-xs" title="Excluir cadastro do cliente">
+                <span class="glyphicon btncontrol glyphicon-trash"></span>
+              </button>
+          
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
 </div>

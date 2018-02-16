@@ -11,6 +11,7 @@ import { PatientComponent } from 'app/pages/patient/patient.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientService } from 'app/pages/patient/patient.service';
 import { PatientFormComponent } from 'app/pages/patient/patient-form/patient-form.component';
+import { AddScheduleComponent } from './add-schedule/add-schedule.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { PatientFormComponent } from 'app/pages/patient/patient-form/patient-for
   declarations: [
       PatientComponent,
       PatientListComponent,
-      PatientFormComponent    ,
+      PatientFormComponent,
+      AddScheduleComponent    ,
       
   ],
   providers: [ConnService, PatientService ]

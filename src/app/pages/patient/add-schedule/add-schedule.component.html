@@ -1,0 +1,69 @@
+<div class="col-md-6">
+ 
+
+
+  <form class="form-group" [formGroup]="form">
+
+    <p class="control">
+      <legend class="amaranth" >{{patient.name}}</legend>
+    </p>
+    
+    <p class="control">
+        <select class="form-control" (change)="onChange('doctorId' , $event.target.value)">
+          <option *ngFor="let doctor of doctors" [value]="doctor.id">
+            {{doctor.nickname}}
+          </option>
+        </select>
+      <span class="alert-danger" *ngIf="!form.controls.doctor">Médico inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" [textMask]="{mask: mask}" [value]="form.controls.finish | date:'dd/MM/yyyy HH:mm'" class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)" formControlName="initial">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.initial.valid && !form.controls.initial.pristine">Data inválido</span>
+    </p>
+
+    <p class="control">
+      <input type="text" [textMask]="{mask: mask}" class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)" formControlName="finish">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.finish.valid && !form.controls.finish.pristine">Data inválido</span>
+    </p>
+
+    <p class="control">
+        <select class="form-control" (change)="onChange('typeConsultId' , $event.target.value)">
+            <option *ngFor="let type of typesConsult" [value]="type.id">
+              {{type.name}}
+            </option>
+          </select>
+      <span class="alert-danger" *ngIf="!form.controls.status">Tipo de consulta inválido</span>
+    </p>
+
+
+    <p class="control">
+      <select class="selectpicker form-control" formControlName="status">
+        <option value=0>Ativo</option>
+        <option value=1>Cancelado</option>
+        <option value=2>Adiado</option>
+        <option value=3>Concluido</option>
+        <option value=4>Em andamento</option>
+      </select>
+      <span class="alert-danger" *ngIf="!form.controls.status">Genero inválido</span>
+    </p>
+
+    <p>
+      <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
+    </p>
+
+  </form>
+
+  <div class="alert alert-success" role="alert" [hidden]="!savedsuccess">
+    Dados Salvos com sucesso!
+  </div>
+
+
+  <div class="notification is-danger">
+      <ul>
+        <li *ngFor="let erro of errors">
+          {{ erro }}
+        </li>
+      </ul>
+    </div>
+</div>
