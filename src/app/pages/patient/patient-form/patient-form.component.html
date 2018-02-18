@@ -1,11 +1,9 @@
 <div class="col-md-6">
   <legend class="amaranth">{{title}}</legend>
 
-  <div class="notification is-danger">
-    <ul>
-      <li *ngFor="let erro of errors">
-        {{ erro }}
-      </li>
+  <div class="notification alert-danger">
+    <ul >
+      <li *ngFor="let error of errors">{{error.message}}</li>
     </ul>
   </div>
 

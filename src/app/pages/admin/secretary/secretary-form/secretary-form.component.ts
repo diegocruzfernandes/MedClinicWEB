@@ -1,3 +1,4 @@
+import { matchOtherValidator } from 'app/validations/matchOtherValidator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class SecretaryFormComponent implements OnInit {
   inscricao: Subscription;
   title: string = "Cadastrar Secretário";
   modeEdit: boolean = false;
-  public errors: any[] = [];
+  public errors: any;
   savedsuccess: boolean = false;
 
   constructor(
@@ -39,6 +40,7 @@ export class SecretaryFormComponent implements OnInit {
         Validators.required
       ])],
       email: ['', Validators.compose([
+        Validators.email,
         Validators.minLength(3),
         Validators.maxLength(60),
         Validators.required
@@ -48,8 +50,18 @@ export class SecretaryFormComponent implements OnInit {
         Validators.maxLength(60),
         Validators.required
       ])],
+      password: ['', Validators.compose([
+        Validators.minLength(3),
+        Validators.maxLength(60),
+        Validators.required
+      ])],
+      confirmPassword: ['', Validators.compose([
+        Validators.minLength(3),
+        Validators.maxLength(60),
+        matchOtherValidator('password'),
+        Validators.required
+      ])],
       userid: [0],
-      permission: [0, Validators.required],
       enabled: [true],
       id: [0]
     })
@@ -69,7 +81,6 @@ export class SecretaryFormComponent implements OnInit {
               this.form.controls['document'].setValue(this.secretary.document);            
               this.form.controls['email'].setValue(this.secretary.email);
               this.form.controls['nickname'].setValue(this.secretary.nickname);
-              this.form.controls['permission'].setValue(this.secretary.permission);
               this.form.controls['enabled'].setValue(this.secretary.enabled);
               this.title = "Editar dados do Secretário";
               this.modeEdit = true;
@@ -81,6 +92,7 @@ export class SecretaryFormComponent implements OnInit {
       })
   }
   submit() {
+    this.errors = null;
     if (this.form.controls['id'].value <= 0)
       this.SaveNew();
     else      
@@ -90,25 +102,41 @@ export class SecretaryFormComponent implements OnInit {
   SaveNew() {
     this.secretary = this.form.value;
     this.secretaryService.saveData(this.secretary)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      }); 
   }
 
   Update() {
     this.secretary = this.form.value;
     this.secretaryService.updateData(this.secretary)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      }); 
   }
 
   ngOnDestroy() {

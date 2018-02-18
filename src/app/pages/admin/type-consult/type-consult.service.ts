@@ -1,6 +1,7 @@
 import { TypeConsult } from './type-consult.model';
 import { ConnService } from './../../../services/conn.service';
 import { Injectable } from '@angular/core';
+import { Response } from '@angular/http/src/static_response';
 
 @Injectable()
 export class TypeConsultyService {
@@ -31,5 +32,5 @@ export class TypeConsultyService {
         .subscribe(
             res => { console.log(res); },
             err => { console.log("Erro: " + err); });
-    }
+    }  
 }

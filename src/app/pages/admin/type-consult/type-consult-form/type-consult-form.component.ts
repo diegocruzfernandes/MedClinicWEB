@@ -17,7 +17,7 @@ export class TypeConsultFormComponent implements OnInit {
   inscricao: Subscription;
   title: string = "Cadastrar Tipo de Consulta";
   modeEdit: boolean = false;
-  public errors: any[] = [];
+  public errors: any;
   savedsuccess: boolean = false;
 
   constructor(
@@ -65,6 +65,7 @@ export class TypeConsultFormComponent implements OnInit {
   }
 
   submit() {
+    this.errors = null;
     if (this.form.controls['id'].value <= 0)
       this.SaveNew();
     else
@@ -76,11 +77,19 @@ export class TypeConsultFormComponent implements OnInit {
     this.typeConsultService.saveData(this.typeConsult)
       .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });           
   }
 
   Update() {
@@ -88,15 +97,21 @@ export class TypeConsultFormComponent implements OnInit {
     this.typeConsultService.updateData(this.typeConsult)
       .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });           
   }
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
   }
-
 }

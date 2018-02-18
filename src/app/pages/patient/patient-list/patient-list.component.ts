@@ -17,9 +17,9 @@ export class PatientListComponent implements OnInit {
   pagePrevious: boolean = false;
 
   constructor(
-    private patientService: PatientService, 
+    private patientService: PatientService,
     private router: Router
- 
+
   ) { }
 
   ngOnInit() {
@@ -31,15 +31,15 @@ export class PatientListComponent implements OnInit {
     this.router.navigate(['/patient/edit/', id]);
   }
 
-  Delete(id:number){
+  Delete(id: number) {
     this.patientService.removeData(id);
     let index = this.patienties.findIndex(i => i.id === id);
     this.patienties.splice(index, 1);
   }
 
-  AddSchedule(id:number){
+  AddSchedule(id: number) {
     console.log('%c ADD', 'background: #222; color: #bada55');
-    this.router.navigate(['patient/addschedule', id] );
+    this.router.navigate(['patient/addschedule', id]);
   }
 
   NextPage() {
@@ -66,11 +66,15 @@ export class PatientListComponent implements OnInit {
     )
   }
 
-  search(data: string){
-    this.patientService.findData(data, 10, this.page).subscribe(
-      d => { this.patienties = d  },
-      error => console.log('Error' + error)
-    )
+  search(data: string) {
+    if (data == null || data == "") {
+      this.GetAllData(this.page);
+    } else {
+      this.patientService.findData(data, 10, this.page).subscribe(
+        d => { this.patienties = d },
+        error => console.log('Error' + error)        
+      )
+      this.page = 1;
+    }
   }
-
 }

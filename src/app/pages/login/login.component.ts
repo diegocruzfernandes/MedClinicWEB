@@ -46,11 +46,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {   
-    if(this.userAuthService.userAuthenticate) {
-      if(this.loginService.validUser()){
-        this.router.navigateByUrl('/schedule/list');
-      }
-    } 
+
   }
 
   submit() {   

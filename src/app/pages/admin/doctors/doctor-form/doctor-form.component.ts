@@ -3,7 +3,8 @@ import { Doctor } from 'app/pages/admin/doctors/doctor.model';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { matchOtherValidator } from 'app/validations/matchOtherValidator';
 
 @Component({
   selector: 'app-doctor-form',
@@ -43,6 +44,7 @@ export class DoctorFormComponent implements OnInit {
         Validators.required
       ])],
       email: ['', Validators.compose([
+        Validators.email,
         Validators.minLength(3),
         Validators.maxLength(60),
         Validators.required
@@ -52,8 +54,18 @@ export class DoctorFormComponent implements OnInit {
         Validators.maxLength(60),
         Validators.required
       ])],
-      userid: [0],
-      permission: [0, Validators.required],
+      password: ['', Validators.compose([
+        Validators.minLength(3),
+        Validators.maxLength(60),
+        Validators.required
+      ])],
+      confirmPassword: ['', Validators.compose([
+        Validators.minLength(3),
+        Validators.maxLength(60),
+        matchOtherValidator('password'),
+        Validators.required
+      ])],
+      userid: [0],      
       enabled: [true],
       id: [0]
     })
@@ -73,8 +85,7 @@ export class DoctorFormComponent implements OnInit {
               this.form.controls['specialty'].setValue(this.doctor.specialty);
               this.form.controls['codeRegister'].setValue(this.doctor.codeRegister);
               this.form.controls['email'].setValue(this.doctor.email);
-              this.form.controls['nickname'].setValue(this.doctor.nickname);
-              this.form.controls['permission'].setValue(this.doctor.permission);
+              this.form.controls['nickname'].setValue(this.doctor.nickname);              
               this.form.controls['enabled'].setValue(this.doctor.enabled);
               this.title = "Editar dados do Médico";
               this.modeEdit = true;
@@ -86,6 +97,7 @@ export class DoctorFormComponent implements OnInit {
   }
 
   submit() {
+    this.errors = null;
     if (this.doctor.id <= 0 || this.doctor.id == undefined)
       this.SaveNew();
     else      
@@ -96,25 +108,41 @@ export class DoctorFormComponent implements OnInit {
     this.doctor = this.form.value;
     console.log(this.doctor);
     this.doctorService.saveData(this.doctor)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });         
   }
 
   Update() {
     this.doctor = this.form.value;
     this.doctorService.updateData(this.doctor)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });         
   }
 
   ngOnDestroy() {

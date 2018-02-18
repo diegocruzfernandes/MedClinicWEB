@@ -5,25 +5,24 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    
-    constructor(
-        private usersAuthService: UsersAuthService,
-        private router: Router
-      ) { }
 
-      canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-      ): Observable<boolean> | boolean {
+  constructor(
+    private usersAuthService: UsersAuthService,
+    private router: Router,
+    private authService: UsersAuthService
+  ) { }
 
-        console.log('AuthGuard');
-        if(this.usersAuthService.userAuthenticate){
-            
-            console.log("AuthAguard:ATIVADO!");
-            return true;
-        }
-        console.log("AuthAguard: INATIVO!");
-        this.router.navigate(['/login']);
-        return false;
-      }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | boolean {
+
+    console.log('AuthGuard');
+    if (this.usersAuthService.userAuthenticate) {  
+      return true;
+    }
+   
+    this.router.navigate(['/login']);
+    return false;
+  }
 }

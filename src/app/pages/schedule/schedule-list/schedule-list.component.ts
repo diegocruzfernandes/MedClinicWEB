@@ -1,3 +1,5 @@
+import { Response } from '@angular/http/src/static_response';
+import { DoctorService } from './../../admin/doctors/doctor.service';
 
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -14,32 +16,49 @@ import { Schedule } from './../schedule.model';
 })
 export class ScheduleListComponent implements OnInit {
 
-  data: Schedule[];
+  schedule: Schedule[] = [];
   page: number = 1;
   pagePrevious: boolean = false;
-  
-  constructor( private scheduleService: ScheduleService, private router:Router) {    
+  doctors: any;
+  doctorIdSelect: number = -1;
+  statusIdSelect: number = -1;
+  texteFind: string;
+  scheduleList: Schedule[] = [];
+  isRequesting: boolean;
+
+  constructor(
+    private scheduleService: ScheduleService,
+    private router: Router,
+    private doctorService: DoctorService  
+  ) {
   }
 
-  ngOnInit() {
+  ngOnInit() {  
+    this.isRequesting = true;
     this.GetAllData(this.page)
+    this.doctorService.getAllData(10, 1).subscribe(
+      doctor => {
+        this.doctors = doctor;
+        this.doctors;
+      this.isRequesting  =false;
+    });
   }
 
-  AddConsult(id: number){
-    this.router.navigate(['/schedule', id, 'form', true ]);
+  AddConsult(id: number) {
+    this.router.navigate(['/schedule', id, 'form', true]);
   }
 
-  Edit(id:number){
-    this.router.navigate(['/schedule', id, 'form', true ]);
+  Edit(id: number) {
+    this.router.navigate(['/schedule', id, 'form', true]);
   }
-  Delete(id:number){
+  Delete(id: number) {
     this.scheduleService.removeData(id);
-    let index = this.data.findIndex(i => i.id === id);
-    this.data.splice(index, 1);
+    let index = this.schedule.findIndex(i => i.id === id);
+    this.schedule.splice(index, 1);
   }
 
   NextPage() {
-    if (this.data.length >= 1)
+    if (this.schedule.length >= 1)
       this.page = this.page + 1;
     this.GetAllData(this.page)
   }
@@ -57,13 +76,22 @@ export class ScheduleListComponent implements OnInit {
 
   GetAllData(page: number) {
     this.scheduleService.getAllData(10, this.page).subscribe(
-      d => { this.data = d; },
+      d => { this.scheduleList = d; },
       error => console.log('Error' + error)
     )
   }
 
-  search(data: string){
+  search(text: string) {  
+    if (text != null || text != ""){  
+      this.scheduleService.findDetails(10,this.page, text, this.doctorIdSelect, this.statusIdSelect)
+      .map((resp: Response) => resp.json())
+      .subscribe(resp => this.scheduleList = resp );      
+    this.page = 1;
+    }
+  }
 
+  StartFilter(value){
+    console.log("selecinado:"+ value);
   }
 
 }

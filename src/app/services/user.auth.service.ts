@@ -1,3 +1,4 @@
+
 import { environment } from './../../environments/environment.prod';
 import { UserModel } from './user.model';
 import { Observable } from 'rxjs/Observable';
@@ -7,8 +8,7 @@ import 'rxjs/add/operator/map';
 
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { dateConvert } from 'app/shared/dateConvert';
-import { dateTimeConvert } from 'app/shared/dateTimeConvert';
+import { DateTools } from 'app/shared/dateTools';
 
 @Injectable()
 export class UsersAuthService {
@@ -18,7 +18,10 @@ export class UsersAuthService {
     showMenuEmitter = new EventEmitter<boolean>();
     private serviceUrl: string = environment.apiUrl;
 
-    constructor(private http: Http) {
+    constructor(
+        private http: Http,
+        private dateTool: DateTools
+    ) {
     }
 
     GetUserData(): Observable<UserModel> {
@@ -70,7 +73,7 @@ export class UsersAuthService {
                 user.id = body.user.id;
                 user.nickname = body.user.name;
                 let thisNow = new Date();
-                user.dateLogin = dateTimeConvert(thisNow);
+                user.dateLogin = this.dateTool.JsonToDateSimple(thisNow);
                 this.SetUserData(user);
                 this.doLogin(true);
                 

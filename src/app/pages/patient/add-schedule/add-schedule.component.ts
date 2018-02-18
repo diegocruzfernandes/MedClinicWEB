@@ -1,5 +1,7 @@
+
 import { DatePipe } from '@angular/common';
 import { Patient } from './../patient.model';
+import { FormatWidth } from '@angular/common';
 import { PatientService } from 'app/pages/patient/patient.service';
 
 import { Doctor } from 'app/pages/admin/doctors/doctor.model';
@@ -13,6 +15,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { TypeConsult } from 'app/pages/admin/type-consult/type-consult.model';
 
+import { dateTimeConvert } from 'app/shared/dateTimeConvert';
+import { retry } from 'rxjs/operators/retry';
+import { DateTools } from 'app/shared/dateTools';
+
 @Component({
   selector: 'app-add-schedule',
   templateUrl: './add-schedule.component.html',
@@ -22,8 +28,10 @@ export class AddScheduleComponent implements OnInit {
 
   public form: FormGroup;
   schedules: Schedule = new Schedule();
-  doctors: Doctor = new Doctor();
-  typesConsult: TypeConsult = new TypeConsult();
+  doctors: any;
+  doctorSelect: any;
+  typesConsult: any;
+  typeConsultSelect: any;
   patient: Patient = new Patient();
   inscricao: Subscription;
   title: string = "Adicionar consulta Paciente";
@@ -32,7 +40,6 @@ export class AddScheduleComponent implements OnInit {
   public errors: any[] = [];
   savedsuccess: boolean = false;
   formEdit: boolean = false;
-  datePipe = new DatePipe('en-US');
 
   constructor(
     private route: ActivatedRoute,
@@ -41,52 +48,29 @@ export class AddScheduleComponent implements OnInit {
     private doctorService: DoctorService,
     private typeConsultService: TypeConsultyService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dataTool: DateTools
   ) {
     this.form = this.fb.group({
-      doctorId: [0],
-      patientId: [0],
-      patient: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(60),
-        Validators.required
-      ])],
-      doctor: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(60),
-        Validators.required
-      ])],
-      typeconsult: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(60),
-        Validators.required
-      ])],
-      status: ['', Validators.compose([
-        Validators.minLength(3),
-        Validators.maxLength(60),
-        Validators.required
-      ])],
-      initial: [this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm'), Validators.compose([
-        Validators.required,
-        Validators.pattern('/^d{1,2}\.\d{1,2}\.\d{4}$/')
-      ])],
-      finish: [this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm'), Validators.compose([
-        Validators.required,
-        Validators.pattern('([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\d\d\d\d [012]{0,1}[0-9]:[0-6][0-9]')
-      ])],
-      typeConsultId: [0],
-      statusId: [0]
+      id:[0],
+      doctorId: [0,  Validators.required],
+      patientId: [0,  Validators.required],
+      patient: [''],      
+      initial: ['', Validators.compose([Validators.required,  Validators.pattern("([1-9]|([012][0-9])|(3[01]))\\/([0]{0,1}[1-9]|1[012])\\/\\d\\d\\d\\d [012]{0,1}[0-9]:[0-6][0-9]")] )],
+      finish: ['', Validators.compose([Validators.required,  Validators.pattern("([1-9]|([012][0-9])|(3[01]))\\/([0]{0,1}[1-9]|1[012])\\/\\d\\d\\d\\d [012]{0,1}[0-9]:[0-6][0-9]")] )],
+      typeConsultId: [0,  Validators.required],
+      statusId: [0, Validators.required]
     })
   }
 
   ngOnInit() {
 
     this.doctorService.getAllData(10, 1).subscribe(
-      doctor => this.doctors = doctor
+      doctor =>this.doctors = doctor
     );
-
+   
     this.typeConsultService.getAllData(10, 1).subscribe(
-      typecons => this.patientService = typecons
+      typecons => this.typesConsult = typecons
     )
 
     this.inscricao = this.route.params.subscribe(
@@ -96,61 +80,68 @@ export class AddScheduleComponent implements OnInit {
           patient => {
             this.patient = patient.json();
             this.form.controls['patient'].setValue(this.patient.name);
+            this.form.controls['patientId'].setValue(this.patient.id);
+            this.form.controls['initial'].setValue(this.dataTool.DateJsonToDateBR(new Date()));
+            this.form.controls['finish'].setValue(this.dataTool.DateJsonToDateBR(new Date()));
+            console.log(this.dataTool.DateJsonToDateBR(new Date()));
           }, error => this.errors = <any>error
         )
       });
-
-
   }
 
   submit() {
-    if (this.form.controls['id'].value <= 0)
+    this.errors = null;
+
+    let dateTmp=this.form.controls['initial'].value;
+    this.form.controls['initial'].setValue(this.dataTool.StringToJsonDate(dateTmp));
+    let dateTmp2=this.form.controls['finish'].value;
+    this.form.controls['finish'].setValue(this.dataTool.StringToJsonDate(dateTmp2));
+    
       this.SaveNew();
-    else
-      this.Update();
+    
   }
 
   SaveNew() {
     this.schedules = this.form.value;
     this.scheduleService.saveData(this.schedules)
-      .subscribe(
+     .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });      
   }
 
   Update() {
     this.schedules = this.form.value;
     this.scheduleService.updateData(this.schedules)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
-  }
-
-  convertDate(date: Date) {
-    let dtf = date.toString();
-    let dt = dtf.split('T');
-    let d = dt[0];
-
-    let b = d.split('-');
-    return b[2] + '/' + b[1] + '/' + b[0];
-
-  }
-
-  onChange(control, value) {
-    this.form.controls[control].setValue = value;
-    console.log(control + '-' + value);
+      err => {
+        console.log("ERROR->" + err);
+      });      
   }
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
   }
-
 }

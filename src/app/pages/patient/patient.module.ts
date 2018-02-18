@@ -1,3 +1,4 @@
+import { DateTools } from 'app/shared/dateTools';
 import { ConnService } from './../../services/conn.service';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,7 @@ import { AddScheduleComponent } from './add-schedule/add-schedule.component';
       AddScheduleComponent    ,
       
   ],
-  providers: [ConnService, PatientService ]
+  providers: [ConnService, PatientService, DateTools ]
 })
 export class PatientModule {
     constructor() { }

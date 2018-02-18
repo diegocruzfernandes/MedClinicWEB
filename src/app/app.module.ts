@@ -17,6 +17,7 @@ import { MenuComponent } from './shared/menu/menu.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ConnService } from 'app/services/conn.service';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
+import { DateTools } from 'app/shared/dateTools';
 
 
 //import 'rxjs/add/operator/map';
@@ -38,7 +39,7 @@ import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.compon
     PatientModule,
     AppRoutingModule  
   ],
-  providers: [AuthGuard, ConnService, LoginService, UsersAuthService],
+  providers: [AuthGuard, ConnService, LoginService, UsersAuthService, DateTools],
   bootstrap: [AppComponent]
   
 })

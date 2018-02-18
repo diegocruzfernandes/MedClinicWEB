@@ -3,6 +3,7 @@ import { Schedule } from './schedule.model';
 import { ScheduleFormComponent } from './schedule-form/schedule-form.component';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Response } from '@angular/http/src/static_response';
 
 @Injectable()
 export class ScheduleService {
@@ -20,7 +21,9 @@ export class ScheduleService {
         return this.conn.GetFilter(this.path, id);
     }
 
-    
+    findDetails(skip: number, take: number, text: string, doctorId: number, statusId: number ){
+        return this.conn.FindDetails(this.path, skip, take, text, doctorId, statusId)
+    }
 
     saveData(schedule: Schedule) {
         return this.conn.Post(this.path, schedule)    

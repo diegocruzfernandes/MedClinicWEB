@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://medclinic.azurewebsites.net',
+  apiUrl: 'http://localhost:63038',
+  //apiUrl: 'https://medclinic.azurewebsites.net',
 };

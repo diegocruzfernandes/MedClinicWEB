@@ -87,6 +87,7 @@ export class PatientFormComponent implements OnInit {
   }
 
   submit() {
+    this.errors = null;
     if (this.form.controls['id'].value <= 0)
       this.SaveNew();
     else
@@ -105,25 +106,41 @@ export class PatientFormComponent implements OnInit {
       "enabled": this.form.controls['enabled'].value,
     };
     this.patientService.saveData(value)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });    
   }
 
   Update() {
     this.patient = this.form.value;
     this.patientService.updateData(this.patient)
-      .subscribe(
+    .subscribe(
       res => {
-        this.savedsuccess = true;
-        this.form.reset();
+        let list = res.json();
+        if (list.success === true) {
+          this.savedsuccess = true;
+          this.errors = null;
+          this.form.reset();
+        } else {
+          this.savedsuccess = false;
+          this.errors = list.data;
+        }
       },
-      err => { this.errors = err; }
-      );
+      err => {
+        console.log("ERROR->" + err);
+      });    
   }
 
   convertDate(date: Date){

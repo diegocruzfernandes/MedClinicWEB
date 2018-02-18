@@ -35,17 +35,5 @@ export class LoginService {
     return this.userAuth.authenticate(userLogin.username, userLogin.password) 
   }
 
-  validUser(): boolean {
-    const token = localStorage.getItem('token');
-
-    if (this.userAuth.TokenIsValid(token)) {
-      this.userAuth.doLogin(true);
-      console.log("Valid User: Está ATIVO!");
-      return true;
-    } else {
-      console.log("Valid User: NÂO ATIVO!");
-      this.userAuth.doLogin(false);
-      return false;
-    }
-  }
+ 
 }
