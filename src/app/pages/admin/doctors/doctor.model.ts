@@ -1,5 +1,4 @@
-export class Doctor{
-    
+export class Doctor{    
     id: number;
     name: string;
     specialty: number;

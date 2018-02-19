@@ -1,9 +1,9 @@
-import { TypeConsultyService } from './../type-consult.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { TypeConsult } from './../type-consult.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { TypeConsultyService } from './../type-consult.service';
+import { TypeConsult } from './../type-consult.model';
 
 @Component({
   selector: 'app-type-consult-form',
@@ -89,7 +89,7 @@ export class TypeConsultFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });           
+      });
   }
 
   Update() {
@@ -108,7 +108,7 @@ export class TypeConsultFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });           
+      });
   }
 
   ngOnDestroy() {

@@ -1,12 +1,10 @@
-import { PatientFormComponent } from 'app/pages/patient/patient-form/patient-form.component';
-import { PatientListComponent } from './patient-list/patient-list.component';
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-
 import { PatientComponent } from './patient.component';
 import { AddScheduleComponent } from 'app/pages/patient/add-schedule/add-schedule.component';
+import { PatientFormComponent } from 'app/pages/patient/patient-form/patient-form.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
 
 const patientgRoutes: Routes = [
     {

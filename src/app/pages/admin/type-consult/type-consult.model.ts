@@ -1,5 +1,4 @@
-export class TypeConsult{
-    
+export class TypeConsult{    
     id: number;
     name: string;
     description: number;

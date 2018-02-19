@@ -1,23 +1,20 @@
-
 import { DatePipe } from '@angular/common';
 import { Patient } from './../patient.model';
 import { FormatWidth } from '@angular/common';
-import { PatientService } from 'app/pages/patient/patient.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Doctor } from 'app/pages/admin/doctors/doctor.model';
+import { retry } from 'rxjs/operators/retry';
 import { TypeConsultyService } from './../../admin/type-consult/type-consult.service';
 import { DoctorService } from './../../admin/doctors/doctor.service';
 import { ScheduleService } from './../../schedule/schedule.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { Schedule } from './../../schedule/schedule.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 import { TypeConsult } from 'app/pages/admin/type-consult/type-consult.model';
-
 import { dateTimeConvert } from 'app/shared/dateTimeConvert';
-import { retry } from 'rxjs/operators/retry';
 import { DateTools } from 'app/shared/dateTools';
+import { PatientService } from 'app/pages/patient/patient.service';
 
 @Component({
   selector: 'app-add-schedule',
@@ -64,7 +61,6 @@ export class AddScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.doctorService.getAllData(10, 1).subscribe(
       doctor =>this.doctors = doctor
     );
@@ -91,14 +87,11 @@ export class AddScheduleComponent implements OnInit {
 
   submit() {
     this.errors = null;
-
     let dateTmp=this.form.controls['initial'].value;
     this.form.controls['initial'].setValue(this.dataTool.StringToJsonDate(dateTmp));
     let dateTmp2=this.form.controls['finish'].value;
-    this.form.controls['finish'].setValue(this.dataTool.StringToJsonDate(dateTmp2));
-    
-      this.SaveNew();
-    
+    this.form.controls['finish'].setValue(this.dataTool.StringToJsonDate(dateTmp2));    
+    this.SaveNew();    
   }
 
   SaveNew() {

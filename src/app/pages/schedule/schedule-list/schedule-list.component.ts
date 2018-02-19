@@ -1,13 +1,11 @@
-import { Response } from '@angular/http/src/static_response';
-import { DoctorService } from './../../admin/doctors/doctor.service';
-
+import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
 import { ScheduleService } from 'app/pages/schedule/schedule.service';
 import { SheduleModule } from 'app/pages/schedule/schedule.module';
 import { Schedule } from './../schedule.model';
+import { DoctorService } from './../../admin/doctors/doctor.service';
 
 @Component({
   selector: 'app-schedule-list',
@@ -16,22 +14,20 @@ import { Schedule } from './../schedule.model';
 })
 export class ScheduleListComponent implements OnInit {
 
-  schedule: Schedule[] = [];
   page: number = 1;
   pagePrevious: boolean = false;
   doctors: any;
   doctorIdSelect: number = -1;
   statusIdSelect: number = -1;
   texteFind: string;
-  scheduleList: Schedule[] = [];
+  scheduleList: Schedule[];
   isRequesting: boolean;
 
   constructor(
     private scheduleService: ScheduleService,
     private router: Router,
     private doctorService: DoctorService  
-  ) {
-  }
+  ) {  }
 
   ngOnInit() {  
     this.isRequesting = true;
@@ -49,16 +45,16 @@ export class ScheduleListComponent implements OnInit {
   }
 
   Edit(id: number) {
-    this.router.navigate(['/schedule', id, 'form', true]);
+    this.router.navigate(['/schedule/form/', id]);
   }
   Delete(id: number) {
     this.scheduleService.removeData(id);
-    let index = this.schedule.findIndex(i => i.id === id);
-    this.schedule.splice(index, 1);
+    let index = this.scheduleList.findIndex(i => i.id === id);
+    this.scheduleList.splice(index, 1);
   }
 
   NextPage() {
-    if (this.schedule.length >= 1)
+    if (this.scheduleList.length >= 1)
       this.page = this.page + 1;
     this.GetAllData(this.page)
   }
@@ -89,9 +85,4 @@ export class ScheduleListComponent implements OnInit {
     this.page = 1;
     }
   }
-
-  StartFilter(value){
-    console.log("selecinado:"+ value);
-  }
-
 }

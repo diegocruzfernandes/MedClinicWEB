@@ -38,10 +38,12 @@
           </a>
         </li>
       </ul>
+
     </div>
   </nav>
 </div>
 <div class="row table-row">
+
   <table class="table">
     <thead class="thead">
       <tr>
@@ -50,7 +52,6 @@
         <th>Telefone</th>
         <th>Nascimento</th>
         <th></th>
-
       </tr>
     </thead>
     <tbody class="tbody">
@@ -60,23 +61,20 @@
         <td>{{item.phoneNumber}}</td>
         <td>{{item.birthDate | date:'dd/MM/yyyy'}}</td>
         <td>
-          <div >
-           
-              <button (click)="AddSchedule(item.id)" class="btn btn-success btn-xs" title="Adicionar agendamento">
-                <span class="glyphicon btncontrol glyphicon-plus"></span>
-              </button>
-           
-              <button (click)="Edit(item.id)" class="btn btn-primary btn-xs" title="Editar dados do paciente">
-                <span class="glyphicon btncontrol glyphicon-pencil"></span>
-              </button>
-            
-              <button (click)="Delete(item.id)" class="btn btn-danger btn-xs" title="Excluir cadastro do cliente">
-                <span class="glyphicon btncontrol glyphicon-trash"></span>
-              </button>
-          
+          <div>
+            <button (click)="AddSchedule(item.id)" class="btn btn-success btn-xs" title="Adicionar agendamento">
+              <span class="glyphicon btncontrol glyphicon-plus"></span>
+            </button>
+
+            <button (click)="Edit(item.id)" class="btn btn-primary btn-xs" title="Editar dados do paciente">
+              <span class="glyphicon btncontrol glyphicon-pencil"></span>
+            </button>
+
+            <button (click)="Delete(item.id)" class="btn btn-danger btn-xs" title="Excluir cadastro do cliente">
+              <span class="glyphicon btncontrol glyphicon-trash"></span>
+            </button>
           </div>
         </td>
-
       </tr>
     </tbody>
   </table>

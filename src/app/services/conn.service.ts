@@ -1,11 +1,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { Observer } from 'rxjs/Observer';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment.prod';
 import 'rxjs/add/operator/map';
-
 import { Observable } from 'rxjs/Observable';
 import { Route } from '@angular/compiler/src/core';
 
@@ -18,10 +16,10 @@ export class ConnService {
     constructor(
         private http: Http, 
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute
+    ) { }
 
-    ngOnInit() {        
-    }
+    ngOnInit() {  }
 
     private HeaderDefalt(): RequestOptions{
         let token = localStorage.getItem('token');        
@@ -41,8 +39,7 @@ export class ConnService {
     GetAll(path: string, skip: number, take:number) {  
         let params: string;
         if(skip > 0 && take > 0){
-            params = "?page_size="+skip+"&page="+take;
-        }        
+            params = "?page_size="+skip+"&page="+take; }        
         return this.http
             .get(this.serviceUrl + path + params, this.HeaderDefalt())
             .map((res: Response) => res.json());          
@@ -58,10 +55,8 @@ export class ConnService {
     FindDetails(path: string, skip: number, take: number, text: string, doctorId: number, statusId: number ){
         let params  = "?page_size="+skip+"&page="+take+'&text='+text+'&doctorid='+doctorId+'&statusid'+statusId;
         return this.http
-            .get(this.serviceUrl + path + params, this.HeaderDefalt())
-                      
+            .get(this.serviceUrl + path + params, this.HeaderDefalt())                      
     }   
-
 
     Post(path: string, data: any): Observable<any> {
         return this.http

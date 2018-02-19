@@ -1,7 +1,5 @@
-
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
 import { PatientService } from 'app/pages/patient/patient.service';
 import { Patient } from './../patient.model';
 
@@ -19,7 +17,6 @@ export class PatientListComponent implements OnInit {
   constructor(
     private patientService: PatientService,
     private router: Router
-
   ) { }
 
   ngOnInit() {
@@ -27,7 +24,6 @@ export class PatientListComponent implements OnInit {
   }
 
   Edit(id: number) {
-    console.log(id);
     this.router.navigate(['/patient/edit/', id]);
   }
 
@@ -38,7 +34,6 @@ export class PatientListComponent implements OnInit {
   }
 
   AddSchedule(id: number) {
-    console.log('%c ADD', 'background: #222; color: #bada55');
     this.router.navigate(['patient/addschedule', id]);
   }
 

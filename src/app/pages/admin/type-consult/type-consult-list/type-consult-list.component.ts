@@ -3,7 +3,6 @@ import { TypeConsultyService } from './../type-consult.service';
 import { TypeConsult } from './../type-consult.model';
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-type-consult-list',
   templateUrl: './type-consult-list.component.html',
@@ -14,26 +13,25 @@ export class TypeConsultListComponent implements OnInit {
   typeConsult: TypeConsult[] = [];
 
   constructor(
-    private typeConsultService: TypeConsultyService, 
-    private router:Router,
+    private typeConsultService: TypeConsultyService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    this.typeConsultService.getAllData(10,1).subscribe(
+    this.typeConsultService.getAllData(10, 1).subscribe(
       t => this.typeConsult = t,
-      error => console.log('Error'+ error)
+      error => console.log('Error' + error)
     )
   }
 
-  Edit(id:number){
+  Edit(id: number) {
     console.log(id);
     this.router.navigate(['/typeconsult/edit/', id]);
   }
 
-  Delete(id:number){
-   this.typeConsultService.removeData(id);
-   let index = this.typeConsult.findIndex(i => i.id === id);
-   this.typeConsult.splice(index, 1);
+  Delete(id: number) {
+    this.typeConsultService.removeData(id);
+    let index = this.typeConsult.findIndex(i => i.id === id);
+    this.typeConsult.splice(index, 1);
   }
-
 }

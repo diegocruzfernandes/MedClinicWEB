@@ -1,10 +1,10 @@
-import { DoctorService } from './../doctor.service';
-import { Doctor } from 'app/pages/admin/doctors/doctor.model';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { matchOtherValidator } from 'app/validations/matchOtherValidator';
+import { DoctorService } from './../doctor.service';
+import { Doctor } from 'app/pages/admin/doctors/doctor.model';
 
 @Component({
   selector: 'app-doctor-form',
@@ -65,7 +65,7 @@ export class DoctorFormComponent implements OnInit {
         matchOtherValidator('password'),
         Validators.required
       ])],
-      userid: [0],      
+      userid: [0],
       enabled: [true],
       id: [0]
     })
@@ -85,7 +85,7 @@ export class DoctorFormComponent implements OnInit {
               this.form.controls['specialty'].setValue(this.doctor.specialty);
               this.form.controls['codeRegister'].setValue(this.doctor.codeRegister);
               this.form.controls['email'].setValue(this.doctor.email);
-              this.form.controls['nickname'].setValue(this.doctor.nickname);              
+              this.form.controls['nickname'].setValue(this.doctor.nickname);
               this.form.controls['enabled'].setValue(this.doctor.enabled);
               this.title = "Editar dados do Médico";
               this.modeEdit = true;
@@ -100,7 +100,7 @@ export class DoctorFormComponent implements OnInit {
     this.errors = null;
     if (this.doctor.id <= 0 || this.doctor.id == undefined)
       this.SaveNew();
-    else      
+    else
       this.Update();
   }
 
@@ -108,7 +108,7 @@ export class DoctorFormComponent implements OnInit {
     this.doctor = this.form.value;
     console.log(this.doctor);
     this.doctorService.saveData(this.doctor)
-    .subscribe(
+      .subscribe(
       res => {
         let list = res.json();
         if (list.success === true) {
@@ -122,13 +122,13 @@ export class DoctorFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });         
+      });
   }
 
   Update() {
     this.doctor = this.form.value;
     this.doctorService.updateData(this.doctor)
-    .subscribe(
+      .subscribe(
       res => {
         let list = res.json();
         if (list.success === true) {
@@ -142,7 +142,7 @@ export class DoctorFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });         
+      });
   }
 
   ngOnDestroy() {

@@ -10,23 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SecretaryListComponent implements OnInit {
 
-  secretaries: Secretary[] =[];
+  secretaries: Secretary[] = [];
 
-  constructor(private secretaryService:SecretaryService, private router: Router ) { }
+  constructor(
+    private secretaryService: SecretaryService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.secretaryService.getAllData(10,1).subscribe(
+    this.secretaryService.getAllData(10, 1).subscribe(
       s => this.secretaries = s,
-      error => console.log('Error'+ error)
+      error => console.log('Error' + error)
     )
   }
 
-  Edit(id:number){
+  Edit(id: number) {
     console.log(id);
     this.router.navigate(['/secretary/edit/', id]);
   }
 
-  Delete(id:number){
+  Delete(id: number) {
     this.secretaryService.removeData(id);
     let index = this.secretaries.findIndex(i => i.id === id);
     this.secretaries.splice(index, 1);

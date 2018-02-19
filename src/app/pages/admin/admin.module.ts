@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/operator/map';
-
 import { AdminComponent } from 'app/pages/admin/admin.component';
 import { DoctorFormComponent } from 'app/pages/admin/doctors/doctor-form/doctor-form.component';
 import { TypeConsultComponent } from 'app/pages/admin/type-consult/type-consult.component';
@@ -19,7 +18,6 @@ import { AdminRoutingModule } from 'app/pages/admin/admin.routing.module';
 import { ConnService } from 'app/services/conn.service';
 import { TypeConsultyService } from './type-consult/type-consult.service';
 import { SecretaryService } from './secretary/secretaty.service';
-
 
 @NgModule({
   imports: [
@@ -38,10 +36,10 @@ import { SecretaryService } from './secretary/secretaty.service';
     SecretaryComponent,
     SecretaryFormComponent,
     SecretaryListComponent,
-    TypeConsultComponent, 
+    TypeConsultComponent,
     TypeConsultFormComponent,
     TypeConsultListComponent
   ],
-  providers: [DoctorService, ConnService, SecretaryService, TypeConsultyService ]
+  providers: [DoctorService, ConnService, SecretaryService, TypeConsultyService]
 })
 export class AdminModule { }

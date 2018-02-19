@@ -10,12 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class ScheduleComponent implements OnInit {
   inscricao: Subscription;
   
-  constructor(private router:Router, private route: ActivatedRoute,) {
-    
-      
+  constructor(private router:Router, private route: ActivatedRoute) {          
   }
+
   ngOnInit() {
     this.router.navigateByUrl("/schedule/list");
   }
-
 }

@@ -1,14 +1,12 @@
-
-import { environment } from './../../environments/environment.prod';
-import { UserModel } from './user.model';
 import { Observable } from 'rxjs/Observable';
 import { retry } from 'rxjs/operators/retry';
 import { window } from 'rxjs/operator/window';
-import 'rxjs/add/operator/map';
-
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { UserModel } from './user.model';
 import { DateTools } from 'app/shared/dateTools';
+import { environment } from './../../environments/environment.prod';
 
 @Injectable()
 export class UsersAuthService {
@@ -21,17 +19,14 @@ export class UsersAuthService {
     constructor(
         private http: Http,
         private dateTool: DateTools
-    ) {
-    }
+    ) {  }
 
     GetUserData(): Observable<UserModel> {
         let newUser: UserModel = new UserModel();
-
         newUser.token = localStorage.getItem('token');
         newUser.id = localStorage.getItem('id');
         newUser.nickname = localStorage.getItem('nickname');
         newUser.dateLogin = localStorage.getItem('dateLogin');
-
         return new Observable<UserModel>(observer => {
             observer.next(newUser);
             observer.complete();
@@ -59,12 +54,11 @@ export class UsersAuthService {
             .post(this.serviceUrl + '/v1/account/valid', token)
     }
 
-    authenticate(user: string, pass: string): boolean {
+    authenticate(user: string, pass: string) {
         var dt = "grant_type=password&email=" + user + "&password=" + pass;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
-
-        this.http.post(this.serviceUrl + '/v1/account', dt, options)
+        return this.http.post(this.serviceUrl + '/v1/account', dt, options)
             .subscribe(
             (data: any) => {
                 let body = data.json();
@@ -75,22 +69,17 @@ export class UsersAuthService {
                 let thisNow = new Date();
                 user.dateLogin = this.dateTool.JsonToDateSimple(thisNow);
                 this.SetUserData(user);
-                this.doLogin(true);
-                
-                return true;
+                this.doLogin(true);   
             },
             error => {
                 console.log(error);
                 this.doLogin(false);
                 alert("Usuário ou senha inválido!");
             });
-        return false;
     }
 
     doLogin(login: boolean) {
         this.userAuthenticate = login;
         this.showMenuEmitter.emit(login);
     }
-
-
 }

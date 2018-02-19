@@ -1,6 +1,5 @@
 import {FormControl} from '@angular/forms';
 
-
 export function matchOtherValidator (otherControlName: string) {
 
   let thisControl: FormControl;
@@ -12,7 +11,6 @@ export function matchOtherValidator (otherControlName: string) {
       return null;
     }
 
-    // Initializing the validator.
     if (!thisControl) {
       thisControl = control;
       otherControl = control.parent.get(otherControlName) as FormControl;
@@ -33,9 +31,6 @@ export function matchOtherValidator (otherControlName: string) {
         matchOther: true
       };
     }
-
     return null;
-
   }
-
 }

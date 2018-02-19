@@ -1,5 +1,4 @@
 export class Schedule {
-
     "id": number;
     "patientid": number;
     "patient": string;

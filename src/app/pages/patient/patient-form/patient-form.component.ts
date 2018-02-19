@@ -1,10 +1,7 @@
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-
-
 import { Patient } from './../patient.model';
 import { PatientService } from 'app/pages/patient/patient.service';
 
@@ -20,10 +17,10 @@ export class PatientFormComponent implements OnInit {
   inscricao: Subscription;
   title: string = "Cadastrar Paciente";
   modeEdit: boolean = false;
-  public mask = [ /\d/, /\d/,'/',/\d/,/\d/,'/',/\d/, /\d/, /\d/, /\d/];
+  public mask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
   public errors: any[] = [];
   savedsuccess: boolean = false;
- 
+
   constructor(
     private route: ActivatedRoute,
     private patientService: PatientService,
@@ -47,12 +44,10 @@ export class PatientFormComponent implements OnInit {
       ])],
       details: [null, Validators.compose([
         Validators.maxLength(255)
-       
       ])],
       birthdate: ['', Validators.compose([
         Validators.required,
         Validators.pattern('(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}')
-
       ])],
       gender: [0],
       enabled: [true],
@@ -95,7 +90,6 @@ export class PatientFormComponent implements OnInit {
   }
 
   SaveNew() {
-
     let value: any = {
       "name": this.form.controls['name'].value,
       "gender": this.form.controls['gender'].value,
@@ -106,7 +100,7 @@ export class PatientFormComponent implements OnInit {
       "enabled": this.form.controls['enabled'].value,
     };
     this.patientService.saveData(value)
-    .subscribe(
+      .subscribe(
       res => {
         let list = res.json();
         if (list.success === true) {
@@ -120,13 +114,13 @@ export class PatientFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });    
+      });
   }
 
   Update() {
     this.patient = this.form.value;
     this.patientService.updateData(this.patient)
-    .subscribe(
+      .subscribe(
       res => {
         let list = res.json();
         if (list.success === true) {
@@ -140,20 +134,18 @@ export class PatientFormComponent implements OnInit {
       },
       err => {
         console.log("ERROR->" + err);
-      });    
+      });
   }
 
-  convertDate(date: Date){
+  convertDate(date: Date) {
     let dtf = date.toString();
     let dt = dtf.split('T');
     let d = dt[0];
-
     let b = d.split('-');
-    return b[2] +'/'+ b[1] + '/' + b[0];
+    return b[2] + '/' + b[1] + '/' + b[0];
   }
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
   }
 }
-

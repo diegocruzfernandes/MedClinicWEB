@@ -1,9 +1,9 @@
-import { ConnService } from 'app/services/conn.service';
-import { Schedule } from './schedule.model';
-import { ScheduleFormComponent } from './schedule-form/schedule-form.component';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http/src/static_response';
+import { ConnService } from 'app/services/conn.service';
+import { Schedule } from './schedule.model';
+import { ScheduleFormComponent } from './schedule-form/schedule-form.component';
 
 @Injectable()
 export class ScheduleService {

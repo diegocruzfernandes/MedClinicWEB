@@ -1,47 +1,37 @@
 <div class="col-md-6">
-  
   <div class="notification alert-danger">
-    <ul >
+    <ul>
       <li *ngFor="let error of errors">{{error.message}}</li>
     </ul>
   </div>
-
   <form class="form-group" [formGroup]="form">
-
     <p class="control">
-      <legend class="amaranth" >{{patient.name}}</legend>
+      <legend class="amaranth">{{patient.name}}</legend>
     </p>
-    
     <p class="control">
-        <select class="form-control" formControlName="doctorId">
-          <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
-            {{doctor.nickname}} / {{doctor.specialty}}
-          </option>
-        </select>
+      <select class="form-control" formControlName="doctorId">
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+          {{doctor.nickname}} / {{doctor.specialty}}
+        </option>
+      </select>
       <span class="alert-danger" *ngIf="!form.controls.doctorId">Médico inválido</span>
     </p>
-
     <p class="control">
-      <input  type="text" [textMask]="{mask: mask}" class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)" formControlName="initial">
-      <span class="alert-danger" role="alert" *ngIf="!form.controls.initial.valid">Data inválido</span>   
+      <input type="text" [textMask]="{mask: mask}" class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)" formControlName="initial">
+      <span class="alert-danger" role="alert" *ngIf="!form.controls.initial.valid">Data inválido</span>
     </p>
-    
-   
     <p class="control">
       <input type="text" [textMask]="{mask: mask}" class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)" formControlName="finish">
       <span class="alert-danger" role="alert" *ngIf="!form.controls.finish.valid && !form.controls.finish.pristine">Data inválido</span>
     </p>
-  
-    
     <p class="control">
-        <select class="form-control" formControlName="typeConsultId">
-            <option *ngFor="let type of typesConsult" [ngValue]="type.id">
-              {{type.name}}
-            </option>
-          </select>
+      <select class="form-control" formControlName="typeConsultId">
+        <option *ngFor="let type of typesConsult" [ngValue]="type.id">
+          {{type.name}}
+        </option>
+      </select>
       <span class="alert-danger" *ngIf="!form.controls.typeConsultId">Tipo de consulta inválido</span>
     </p>
- 
     <p class="control">
       <select class="selectpicker form-control" formControlName="statusId">
         <option value=0>Ativo</option>
@@ -52,17 +42,11 @@
       </select>
       <span class="alert-danger" *ngIf="!form.controls.statusId">Genero inválido</span>
     </p>
-
     <p>
       <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
     </p>
-
   </form>
-
   <div class="alert alert-success" role="alert" [hidden]="!savedsuccess">
     Dados Salvos com sucesso!
   </div>
-
-
- 
 </div>

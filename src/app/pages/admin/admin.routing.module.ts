@@ -1,11 +1,9 @@
 import { TypeConsultListComponent } from './type-consult/type-consult-list/type-consult-list.component';
 import { SecretaryListComponent } from './secretary/secretary-list/secretary-list.component';
 import { SecretaryComponent } from './secretary/secretary.component';
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-
 import { AdminComponent } from 'app/pages/admin/admin.component';
 import { DoctorsComponent } from 'app/pages/admin/doctors/doctors.component';
 import { DoctorFormComponent } from 'app/pages/admin/doctors/doctor-form/doctor-form.component';
@@ -13,7 +11,6 @@ import { DoctorsListComponent } from './doctors/doctors-list/doctors-list.compon
 import { SecretaryFormComponent } from 'app/pages/admin/secretary/secretary-form/secretary-form.component';
 import { TypeConsultComponent } from 'app/pages/admin/type-consult/type-consult.component';
 import { TypeConsultFormComponent } from 'app/pages/admin/type-consult/type-consult-form/type-consult-form.component';
-
 
 const AdmingRoutes: Routes = [
     { path: '', component: AdminComponent, children: [

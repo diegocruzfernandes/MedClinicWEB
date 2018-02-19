@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-
 import { SecretaryService } from 'app/pages/admin/secretary/secretaty.service';
 import { Secretary } from './../secretary.model';
 
@@ -142,5 +141,4 @@ export class SecretaryFormComponent implements OnInit {
   ngOnDestroy() {
     this.inscricao.unsubscribe();
   }
-
 }

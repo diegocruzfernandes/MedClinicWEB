@@ -1,9 +1,7 @@
-
-import { ConnService } from './../../../services/conn.service';
-import { Doctor } from './doctor.model';
-
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { ConnService } from './../../../services/conn.service';
+import { Doctor } from './doctor.model';
 
 @Injectable()
 export class DoctorService {
@@ -27,13 +25,13 @@ export class DoctorService {
         return this.conn.Post(this.path, doctor);
     }
 
-    updateData(doctor:Doctor){
+    updateData(doctor: Doctor) {
         return this.conn.Put(this.path, doctor);
     }
 
-    removeData(id:number){
+    removeData(id: number) {
         return this.conn.Delete(this.path, id)
-        .subscribe(
+            .subscribe(
             res => { console.log(res); },
             err => { console.log("Erro: " + err); });
     }

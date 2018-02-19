@@ -2,7 +2,6 @@ import { ConnService } from './../../../services/conn.service';
 import { Injectable } from '@angular/core';
 import { Secretary } from './secretary.model';
 
-
 @Injectable()
 export class SecretaryService {
 

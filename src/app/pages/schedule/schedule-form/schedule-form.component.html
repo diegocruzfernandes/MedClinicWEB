@@ -9,40 +9,28 @@
       </ul>
     </div>
   
-    <form class="form-group" [formGroup]="form">
-      
+    <form class="form-group" [formGroup]="form">      
       <p class="control">
         <input type="text" class="form-control" placeholder="Nome" formControlName="patient">
         <span class="alert-danger" role="alert" *ngIf="!form.controls['patient'].valid && !form.controls['patient'].pristine">Nome inválido</span>
       </p>  
-
       <p class="control">
         <select class="selectpicker form-control" formControlName="doctor">
           <option value=0>Dr 1</option>
           <option value=1>Dr 2</option>
           <option value=1>Dr 3</option>
-          <option value=1>Dr 4</option>
-      
+          <option value=1>Dr 4</option>      
         </select>
         <span class="alert-danger" *ngIf="!form.controls.doctor">Genero inválido</span>
       </p>
-
-  <!--
-      <p class="control">
-        <input type="text" class="form-control" placeholder="Telefone"  formControlName="typeconsult">
-        <span class="alert-danger" role="alert" *ngIf="!form.controls.typeconsult.valid && !form.controls.typeconsult.pristine">Telefone inválido</span>
-      </p>
-    -->
       <p class="control">
         <input type="text" [textMask]="{mask: mask}"  class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)"  formControlName="initial">
         <span class="alert-danger" role="alert" *ngIf="!form.controls.initial.valid && !form.controls.initial.pristine">Data inválido</span>
       </p>
-
       <p class="control">
         <input type="text" [textMask]="{mask: mask}"  class="form-control" placeholder="Previsão de término (dd/mm/yyyy HH:mm)"  formControlName="finish">
         <span class="alert-danger" role="alert" *ngIf="!form.controls.finish.valid && !form.controls.finish.pristine">Data inválido</span>
       </p>
-
       <p class="control">
         <select class="selectpicker form-control" formControlName="typeconsult">
           <option value=0>Ativo</option>
@@ -52,9 +40,7 @@
           <option value=4>Em andamento</option>
         </select>
         <span class="alert-danger" *ngIf="!form.controls.status">Genero inválido</span>
-      </p>
-  
- 
+      </p> 
       <p class="control">
         <select class="selectpicker form-control" formControlName="status">
           <option value=0>Ativo</option>
@@ -64,16 +50,13 @@
           <option value=4>Em andamento</option>
         </select>
         <span class="alert-danger" *ngIf="!form.controls.status">Genero inválido</span>
-      </p>
-  
+      </p>  
       <p>
         <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
-      </p>
-      
+      </p>      
     </form>
   
     <div class="alert alert-success" role="alert" [hidden]="!savedsuccess">
       Dados Salvos com sucesso!
-    </div>
-  
+    </div>  
   </div>

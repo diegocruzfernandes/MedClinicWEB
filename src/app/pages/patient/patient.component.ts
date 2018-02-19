@@ -13,5 +13,4 @@ export class PatientComponent implements OnInit {
   ngOnInit() {
     this.router.navigateByUrl("/patient/list");
   }
-
 }

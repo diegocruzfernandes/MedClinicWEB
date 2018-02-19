@@ -1,11 +1,11 @@
-import { Login } from './login.model';
-import { environment } from './../../../environments/environment.prod';
 import { Router } from '@angular/router';
-import { UsersAuthService } from './../../services/user.auth.service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
+import { UsersAuthService } from './../../services/user.auth.service';
+import { Login } from './login.model';
+import { environment } from './../../../environments/environment.prod';
 
 @Injectable()
 export class LoginService {
@@ -31,9 +31,7 @@ export class LoginService {
     return options;
   }
 
-  authenticate(userLogin: Login): boolean {
-    return this.userAuth.authenticate(userLogin.username, userLogin.password) 
+  authenticate(userLogin: Login) {
+    return this.userAuth.authenticate(userLogin.username, userLogin.password)
   }
-
- 
 }

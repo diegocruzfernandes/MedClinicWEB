@@ -1,8 +1,8 @@
 <div class="col-md-6">
   <legend class="amaranth">{{title}}</legend>
- 
+
   <div class="notification alert-danger">
-    <ul >
+    <ul>
       <li *ngFor="let error of errors">{{error.message}}</li>
     </ul>
   </div>
@@ -22,8 +22,8 @@
       <button (click)="submit()" class="btn btn-primary btn-lg btn-block" [disabled]="!form.valid">Salvar</button>
     </p>
   </form>
-  
-  <div class="alert alert-success" role="alert" [hidden]="!savedsuccess" >
+
+  <div class="alert alert-success" role="alert" [hidden]="!savedsuccess">
     Dados Salvos com sucesso!
   </div>
 
