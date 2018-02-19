@@ -73,7 +73,6 @@ export class PatientFormComponent implements OnInit {
               this.form.controls['enabled'].setValue(this.patient.enabled);
               this.title = "Editar dados do Paciente";
               this.modeEdit = true;
-              console.log(this.patient);
             },
             error => console.log('Error' + error)
           )

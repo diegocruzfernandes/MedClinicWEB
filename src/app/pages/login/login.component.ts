@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   showMenu: boolean = false;
   public form: FormGroup;
   private userLogin: Login = new Login();
+  errors: any =[];
 
   constructor(
     private loginService: LoginService,
@@ -50,11 +51,13 @@ export class LoginComponent implements OnInit {
     this.userLogin.username = this.form.value["username"];
     this.userLogin.password = this.form.value["password"];
     this.loginService.authenticate(this.userLogin)
+
     this.authService.showMenuEmitter.subscribe(
       show => {
       this.showMenu = show;
-        this.router.navigateByUrl('/schedule');
-      }
+        this.router.navigateByUrl('/schedule');        
+      },
+      err => this.errors = err
     );
   }
 }

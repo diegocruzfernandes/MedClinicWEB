@@ -36,7 +36,7 @@ export class ScheduleService {
     removeData(id:number){
         return this.conn.Delete(this.path, id)
         .subscribe(
-            res => { console.log(res); },
+            res => { res; },
             err => { console.log("Erro: " + err); });
     }
 }

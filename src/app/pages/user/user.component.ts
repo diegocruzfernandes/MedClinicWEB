@@ -22,12 +22,11 @@ export class UserComponent implements OnInit{
     let userId  = localStorage.getItem('id');
     if(!userId){
       console.log("ERRO: Usuario não contem ID");
-    }
-    console.log(userId)       
+    }     
     this.userService.getData(Number.parseInt(userId))
     .map((res:Response) => res.json())
     .subscribe(
-      (d:any) => { this.user = d; console.log(d) },
+      (d:any) =>  this.user = d,
       error => console.log('Error' + error)
   )}
 }

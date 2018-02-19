@@ -19,7 +19,7 @@ export class UsersAuthService {
     constructor(
         private http: Http,
         private dateTool: DateTools
-    ) {  }
+    ) { }
 
     GetUserData(): Observable<UserModel> {
         let newUser: UserModel = new UserModel();
@@ -62,14 +62,21 @@ export class UsersAuthService {
             .subscribe(
             (data: any) => {
                 let body = data.json();
-                let user: UserModel = new UserModel();
-                user.token = body.token;
-                user.id = body.user.id;
-                user.nickname = body.user.name;
-                let thisNow = new Date();
-                user.dateLogin = this.dateTool.JsonToDateSimple(thisNow);
-                this.SetUserData(user);
-                this.doLogin(true);   
+                if (body.success) {
+                    let user: UserModel = new UserModel();
+                    user.token = body.token;
+                    user.id = body.user.id;
+                    user.nickname = body.user.name;
+                    let thisNow = new Date();
+                    user.dateLogin = this.dateTool.JsonToDateSimple(thisNow);
+                    this.SetUserData(user);
+                    this.doLogin(true);
+                } else {
+                    console.log("Usuário ou senha inválido!")
+                    alert("Usuário ou senha inválido!");
+                    this.doLogin(false);
+                    return false;  
+                 }               
             },
             error => {
                 console.log(error);

@@ -28,8 +28,8 @@ import { DateTools } from 'app/shared/dateTools';
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
-    UserModule,
-    SheduleModule,        
+    SheduleModule,  
+    UserModule,      
     AdminModule,
     PatientModule,
     AppRoutingModule  

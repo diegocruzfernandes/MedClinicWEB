@@ -19,13 +19,12 @@ export class DoctorsListComponent implements OnInit {
 
   ngOnInit() {
     this.doctorService.getAllData(10, 1).subscribe(
-      d => { this.doctors = d; console.log(this.doctors); },
+      d => this.doctors = d,
       error => console.log('Error' + error)
     )
   }
 
   Edit(id: number) {
-    console.log(id);
     this.router.navigate(['/doctor/edit/', id]);
   }
 

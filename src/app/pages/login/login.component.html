@@ -4,6 +4,13 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <div class="panel-body">
+
+            <div >
+                <ul>
+                  <li *ngFor="let error of errors">{{error}}</li>
+                </ul>
+            </div>
+
             <div class="navbar-header">
               <span>
                 <img src="assets/img/logo.svg" class=" logo">

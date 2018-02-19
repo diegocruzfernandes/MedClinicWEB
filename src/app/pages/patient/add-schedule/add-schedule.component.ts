@@ -78,8 +78,7 @@ export class AddScheduleComponent implements OnInit {
             this.form.controls['patient'].setValue(this.patient.name);
             this.form.controls['patientId'].setValue(this.patient.id);
             this.form.controls['initial'].setValue(this.dataTool.DateJsonToDateBR(new Date()));
-            this.form.controls['finish'].setValue(this.dataTool.DateJsonToDateBR(new Date()));
-            console.log(this.dataTool.DateJsonToDateBR(new Date()));
+            this.form.controls['finish'].setValue(this.dataTool.DateJsonToDateBR(new Date()));           
           }, error => this.errors = <any>error
         )
       });

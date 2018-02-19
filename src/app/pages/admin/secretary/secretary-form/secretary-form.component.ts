@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { SecretaryService } from 'app/pages/admin/secretary/secretaty.service';
 import { Secretary } from './../secretary.model';
+import { VALID } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-secretary-form',

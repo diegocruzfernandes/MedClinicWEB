@@ -23,22 +23,22 @@
       <span class="alert-danger" role="alert" *ngIf="!form.controls.codeRegister.valid && !form.controls.codeRegister.pristine">Registro inválido</span>
     </p>
 
-    <p class="control">
+    <p class="control" >
       <input type="text" class="form-control" placeholder="E-mail" formControlName="email">
       <span class="alert-danger" role="alert" *ngIf="!form.controls.email.valid && !form.controls.email.pristine">E-mail inválido</span>
     </p>
 
-    <p class="control">
+    <p class="control" >
       <input type="text" class="form-control" placeholder="Usuário/Nickname" formControlName="nickname">
       <span class="alert-danger" role="alert" *ngIf="!form.controls.nickname.valid && !form.controls.nickname.pristine">Nome de usuário inválido</span>
     </p>
 
     <div>
-      <p class="control">
+      <p class="control" >
         <input type="password" class="form-control" placeholder="Senha" formControlName="password">
         <span class="alert-danger" role="alert" *ngIf="!form.controls.password.valid && !form.controls.password.pristine">Senha inválida</span>
       </p>
-      <p class="control">
+      <p class="control" >
         <input type="password" class="form-control" placeholder="Repetir senha" formControlName="confirmPassword">
         <span class="alert-danger" role="alert" *ngIf="!form.controls.confirmPassword.valid && !form.controls.confirmPassword.pristine">As senhas estão diferentes</span>
       </p>
